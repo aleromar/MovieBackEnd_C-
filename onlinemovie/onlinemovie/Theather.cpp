@@ -1,6 +1,6 @@
 #include "Theather.h"
 
-
+// Instantiate this static variable
 std::mt19937 theather::rng;
 
 void theather::AddNewFilm(std::string movieName)
@@ -19,11 +19,11 @@ unsigned theather::getRandomSeat(std::string movieName)
 {
     unsigned retVal = 0;
     auto vector = GetAvailableSeats(movieName);
-    // Common resource rng is already protected by calling method
     if (vector.size() > 0)
     {
         std::uniform_int_distribution<unsigned> seatDistr(0, vector.size() - 1);
         {
+            // Protect a common resource. Could probably use a different mutex
             std::lock_guard<std::mutex> lock(mtx);
             retVal = vector.at(seatDistr(rng));
         }
@@ -34,9 +34,10 @@ unsigned theather::getRandomSeat(std::string movieName)
 int theather::NumberSeatsAvailable(std::string movieName)
 {
     int count = 0;
-    std::lock_guard<std::mutex> lock(mtx);
     if (listedFilmsAvailableSeats.find(movieName) != listedFilmsAvailableSeats.end())
     {
+        // Protect common resource before being read
+        std::lock_guard<std::mutex> lock(mtx);
         auto arr = listedFilmsAvailableSeats[movieName];
         for (auto it : arr)
         {
@@ -49,9 +50,10 @@ int theather::NumberSeatsAvailable(std::string movieName)
 std::vector<unsigned> theather::GetAvailableSeats(std::string movieName)
 {
     std::vector<unsigned> retVec;
-    std::lock_guard<std::mutex> lock(mtx);
     if (listedFilmsAvailableSeats.find(movieName) != listedFilmsAvailableSeats.end())
     {
+        // Protect common resource before being read
+        std::lock_guard<std::mutex> lock(mtx);
         auto arr = listedFilmsAvailableSeats[movieName];
         int index = 0;
         for (auto it : arr)

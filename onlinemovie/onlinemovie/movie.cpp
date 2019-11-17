@@ -1,4 +1,5 @@
 #include "movie.h"
+#include "theather.h"
 
 std::string movie::GetMovieName(void)
 {
