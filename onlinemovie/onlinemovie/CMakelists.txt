@@ -1,0 +1,9 @@
+project("onlinemovie")
+enable_testing()
+
+set(BOOST_INCLUDE_DIRS C:\vcpkg\installed\x86-windows\include)
+
+add_executable(onlinemovie movie.cpp onlinemoviedb.cpp Theather.cpp Test.cpp)
+
+target_include_directories(onlinemovie PRIVATE ${BOOST_INCLUDE_DIRS})
+add_test(NAME test1 COMMAND onlinemovie)
