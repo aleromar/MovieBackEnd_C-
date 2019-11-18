@@ -4,8 +4,6 @@
 #include <memory>
 #include <mutex>
 
-//#define PRODUCTION
-
 // Forward declare to avoid compile dependencies
 class movie;
 class theather;

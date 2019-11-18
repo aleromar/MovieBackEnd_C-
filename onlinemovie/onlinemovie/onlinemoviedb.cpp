@@ -186,7 +186,12 @@ std::vector<int> onlinemoviedb::BookSeat(const std::string movieName, const std:
 int main(int argc, char** argv)
 {
     using namespace std;
+#ifdef CMAKEBUILD
+    string dbname = "../../../testdatabase.csv";
+#else
     string dbname = "testdatabase.csv";
+#endif
+    
     if (argc > 1)
     {
         // If the user wants to use a different database file

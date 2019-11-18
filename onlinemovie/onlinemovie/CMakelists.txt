@@ -1,8 +1,11 @@
+cmake_minimum_required(VERSION 3.14)
+
 project("onlinemovie")
 enable_testing()
 
-set(BOOST_INCLUDE_DIRS C:\vcpkg\installed\x86-windows\include)
-
+set(BOOST_INCLUDE_DIRS C:/vcpkg/installed/x86-windows/include)
+add_compile_definitions(PRODUCTION)
+add_compile_definitions(CMAKEBUILD)
 add_executable(onlinemovie movie.cpp onlinemoviedb.cpp Theather.cpp Test.cpp)
 
 target_include_directories(onlinemovie PRIVATE ${BOOST_INCLUDE_DIRS})

@@ -8,7 +8,14 @@
 
 BOOST_AUTO_TEST_CASE(myTestCase)
 {
-  auto& db = onlinemoviedb::getdatabase("testdatabase.csv");
+  // When running a Visual Studio solution the path to database should be "testdatabase.csv"
+  // However, when using CMake file, the path to database should be "../../../testdatabase.csv"
+#ifdef CMAKEBUILD
+    auto& db = onlinemoviedb::getdatabase("../../../testdatabase.csv");
+#else
+    auto& db = onlinemoviedb::getdatabase("testdatabase.csv");
+#endif
+  
   auto movies = db.ListMovies();
   auto theathers = db.ListTheathers();
   
@@ -87,7 +94,7 @@ BOOST_AUTO_TEST_CASE(myTestCase)
       while (true)
       {
           auto booked = db.BookSeat("x-men", "farnborough", 1);
-          results[thnumb] += booked.size();
+          results[thnumb] += static_cast<int>(booked.size());
           if (db.ListAvailableSeats("x-men", "farnborough").size() == 0)
           {
               break;

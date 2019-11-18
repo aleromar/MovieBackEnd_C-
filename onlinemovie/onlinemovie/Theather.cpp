@@ -21,7 +21,7 @@ unsigned theather::getRandomSeat(std::string movieName)
     auto vector = GetAvailableSeats(movieName);
     if (vector.size() > 0)
     {
-        std::uniform_int_distribution<unsigned> seatDistr(0, vector.size() - 1);
+        std::uniform_int_distribution<unsigned> seatDistr(0, static_cast<int>(vector.size()) - 1);
         {
             // Protect a common resource. Could probably use a different mutex
             std::lock_guard<std::mutex> lock(mtx);
