@@ -19,9 +19,9 @@ CMakelists.txt should provide all the functionality required to build, test and 
 The database file is a simple csv file located in the same folder as the rest of the source files. The user can edit this file, but please be advise that changes in this file will cause unit test failures. Alternatively, the user can add a new database file and pass it as an argument to the program (the main function takes the database name as **dbname = argv[1];**).   
 The database follows some simple rules. The first item in the line is the theather name. The following items in the line are the movies featured in that particular theather. The theather can be present in multiple lines featuring different movies. Items must be separated by a comma. For example
 
-*Theather London,X-Men,Terminator
-Theather Fleet,Pulp Fiction,Casablanca
-Theather London,Pulp Fiction*
+*Theather London,X-Men,Terminator    
+Theather Fleet,Pulp Fiction,Casablanca    
+Theather London,Pulp Fiction*   
 
 ### CLI
 The CLI does not provide parallel access to users. Still basic functionality can be used. Note that the desired database needs to be passed to the program as an argument as described before.
